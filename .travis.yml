@@ -1,0 +1,22 @@
+sudo: required
+
+cache:
+  apt: true
+  directories:
+    - $HOME/.opam
+
+install:
+  - sudo add-apt-repository --yes ppa:avsm/ppa
+  - sudo apt-get update
+  - sudo apt-get install opam
+  - opam init -y
+  - eval $(opam config env)
+  - opam config var root
+  - opam install -y ocamlfind ocamlgraph
+  - opam install -y coq.8.5.1
+
+script:
+  - make
+
+notifications:
+  email: false
